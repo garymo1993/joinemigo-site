@@ -114,7 +114,7 @@ ins{text-decoration:none}
 .slime-svg{display:block;width:100%;height:auto;overflow:visible}
 #sl-move{transform-origin:512px 600px}
 #slime{transform-origin:512px 849px}
-#cowlick{transform-origin:630px 240px}
+#cowlick{transform-origin:630px 246px}  /* the centre of the root disc, which sits inside the head, so turning the cowlick can never open a gap */
 #eyes{transform-origin:513px 520px}
 #shadow{transform-origin:512px 856px}
 #blush{transform-origin:510px 591px}
@@ -833,3 +833,6 @@ footer{margin-top:auto;background:var(--ink);color:#D9D2CA;padding:56px 0 40px;f
 .hero .fix.typed del,.hero .fix.typed ins{animation:none}
 /* pause must beat the routine rules above, whose animation shorthand resets play-state */
 .hero .slime-stage.is-paused *{animation-play-state:paused!important}
+
+/* hero vertical overflow (scoped to .hero): the hero used overflow:hidden to stop sideways scroll, which also sliced the cowlick flat whenever the slime rose above the hero's top edge. Clip sideways only. */
+@supports (overflow:clip){.hero{overflow:visible;overflow-x:clip}}
