@@ -34,7 +34,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap">
-<link rel="stylesheet" href="/assets/css/emigo.css">
+<link rel="stylesheet" href="/assets/css/emigo.css?v=20261118c">
 
 </head>
 <body>
@@ -386,13 +386,42 @@ q('.p-big').textContent=p[0]+'0';q('[data-save]').textContent=Math.round((1-p[3]
 [].forEach.call(document.querySelectorAll('.regions button'),function(b){b.setAttribute('aria-pressed',b.getAttribute('data-r')===r)})}
 [].forEach.call(document.querySelectorAll('.regions button'),function(b){b.addEventListener('click',function(){set(b.getAttribute('data-r'))})});
 var r=L[(navigator.language||'').toLowerCase()];if(r)set(r)})();
-(function(){var st=document.querySelector('.slime-stage');if(!st)return;var sl=st.querySelector('#slime');
-if('IntersectionObserver' in window)new IntersectionObserver(function(e){st.classList.toggle('is-paused',!e[0].isIntersecting)}).observe(st);
+(function(){var st=document.querySelector('.slime-stage');if(!st)return;var sl=st.querySelector('#slime'),hero=document.querySelector('.hero'),
+wm=hero.querySelector('.w-meant'),ww=hero.querySelector('.w-what'),EA=[],wind=null,off=false;
+/* the typo intro plays once; lock it so nothing can replay it later */
+var fx=hero.querySelector('.fix');if(fx&&wm)wm.addEventListener('animationend',function(e){if(e.animationName==='typo-in')fx.classList.add('typed')});
+if('IntersectionObserver' in window)new IntersectionObserver(function(e){off=!e[0].isIntersecting;st.classList.toggle('is-paused',off);EA.forEach(function(a){off?a.pause():a.play()})}).observe(st);
 if(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-var q=['a-hop','a-idle','a-roll','a-idle','a-squish','a-idle','a-puff','a-idle','a-eat','a-idle'],i=0,hero=document.querySelector('.hero'),wm=hero.querySelector('.w-meant');
-function eat(on){hero.classList.toggle('eat',on);if(!on||!wm)return;var a=wm.getBoundingClientRect(),b=st.getBoundingClientRect();hero.style.setProperty('--mx',(b.left+b.width*.505-(a.left+a.width/2))+'px');hero.style.setProperty('--my',(b.top+b.height*.6-(a.top+a.height/2))+'px')}
+var q=['a-hop','a-idle','a-roll','a-idle','a-squish','a-idle','a-puff','a-idle','a-eat','a-idle'],i=0,D=6000;
+function seen(el){var r=el.getBoundingClientRect();return r.bottom>0&&r.top<innerHeight&&r.width>0}
+function eatStop(){EA.forEach(function(a){a.cancel()});EA=[];if(wind)wind.innerHTML=''}
+/* routine 5, headline half: runs on the Web Animations API from positions measured at this moment, in step with the slime's own 6s animation, and pauses with it */
+function eatStart(){eatStop();if(!wm||!ww||!wm.animate)return;
+var a=wm.getBoundingClientRect(),s2=st.getBoundingClientRect(),h=hero.getBoundingClientRect(),
+mx=s2.left+s2.width*.505-(a.left+a.width/2),my=s2.top+s2.height*.6-(a.top+a.height/2),T='translate('+mx+'px,'+my+'px)';
+EA.push(wm.animate([{offset:0,transform:'none',opacity:1},{offset:.16,transform:'none',opacity:1,easing:'cubic-bezier(.5,0,.9,.5)'},
+{offset:.28,transform:'translate('+mx*.35+'px,'+my*.3+'px) skewX(-16deg) scale(1.12,.8)',opacity:1,easing:'cubic-bezier(.4,0,.9,.6)'},
+{offset:.40,transform:T+' skewX(-8deg) scale(.06)',opacity:1},{offset:.42,transform:T+' scale(.04)',opacity:0},{offset:.80,transform:T+' scale(.04)',opacity:0},
+{offset:.82,transform:T+' scale(.06)',opacity:1,easing:'cubic-bezier(.1,.7,.3,1)'},{offset:.91,transform:'translate(0,0) scale(1.06,.94)',opacity:1},
+{offset:.95,transform:'translate(0,0) scale(.98,1.03)',opacity:1},{offset:1,transform:'none',opacity:1}],{duration:D}));
+EA.push(ww.animate([{offset:0,transform:'none'},{offset:.44,transform:'none',easing:'cubic-bezier(.6,0,.9,.4)'},{offset:.55,transform:'translateY(1em) rotate(27deg)',easing:'ease-out'},
+{offset:.59,transform:'translateY(1em) rotate(20deg)',easing:'ease-in'},{offset:.63,transform:'translateY(1em) rotate(25deg)'},{offset:.66,transform:'translateY(1em) rotate(23deg)'},
+{offset:.68,transform:'translateY(1em) rotate(24deg)'},{offset:.84,transform:'translateY(1em) rotate(24deg)',easing:'cubic-bezier(.3,0,.3,1)'},
+{offset:.92,transform:'translateY(0) rotate(-4deg)'},{offset:.96,transform:'translateY(0) rotate(2deg)'},{offset:1,transform:'none'}],{duration:D}));
+/* wind: five tapered streaks from around the word into the mouth, staggered, while it is being sucked in */
+if(!wind){wind=document.createElementNS('http://www.w3.org/2000/svg','svg');wind.setAttribute('class','wind');wind.setAttribute('aria-hidden','true');hero.appendChild(wind)}
+var wx=a.left+a.width/2-h.left,wy=a.top+a.height/2-h.top,ex=wx+mx,ey=wy+my,dx=ex-wx,dy=ey-wy,L=Math.sqrt(dx*dx+dy*dy)||1,nx=-dy/L,ny=dx/L;
+for(var k=0;k<5;k++){var sg=k%2?1:-1,sx=wx+(k-2)*a.width*.2,sy=wy+sg*a.height*(.5+.1*k),cx=(sx+ex)/2+nx*sg*(26+13*k),cy=(sy+ey)/2+ny*sg*(26+13*k),
+p=document.createElementNS('http://www.w3.org/2000/svg','path');p.setAttribute('d','M'+sx+' '+sy+' Q'+cx+' '+cy+' '+(ex-8)+' '+(ey+(k-2)*5));wind.appendChild(p);
+var len=p.getTotalLength(),seg=len*.26;p.style.strokeDasharray=seg+' '+(len+seg);p.style.strokeWidth=(4.2-k*.45)+'px';
+EA.push(p.animate([{strokeDashoffset:seg,opacity:0},{strokeDashoffset:seg*.2,opacity:.34,offset:.2},{strokeDashoffset:-len*.75,opacity:.3,offset:.75},{strokeDashoffset:-len,opacity:0}],
+{duration:640,delay:760+k*150,iterations:2,easing:'cubic-bezier(.4,0,.8,.6)',fill:'both'}))}
+if(off)EA.forEach(function(x){x.pause()})}
 st.classList.add('seq',q[0]);
-sl.addEventListener('animationend',function(e){if(e.target!==sl)return;st.classList.remove(q[i]);i=(i+1)%q.length;eat(q[i]==='a-eat');void st.offsetWidth;st.classList.add(q[i])})})();
+sl.addEventListener('animationend',function(e){if(e.target!==sl)return;st.classList.remove(q[i]);eatStop();i=(i+1)%q.length;
+/* only eat when both the word and the slime are on screen; otherwise skip the routine this round */
+if(q[i]==='a-eat'&&!(wm&&seen(wm)&&seen(st)&&!off))i=(i+1)%q.length;
+void st.offsetWidth;st.classList.add(q[i]);if(q[i]==='a-eat')eatStart()})})();
 (function(){var w=document.querySelector('.tswitch');if(!w)return;
 var TX={rf0:"Fine. Do whatever you want.",rf1:"I’m frustrated, but I don’t want this to turn into a fight.\n\nCan we talk when we’re both calmer?",
 in0:"They might be shutting down because they feel hurt.",in1:"I appreciate you sharing that. do you want to talk about what happened or how you're feeling?",
