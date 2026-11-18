@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+<title>Feedback | Emigo Keyboard</title>
+<link rel="canonical" href="https://joinemigo.com/feedback">
+<meta name="description" content="Tell the Emigo team what to fix or build next.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="apple-itunes-app" content="app-id=6748092950">
+<link rel="icon" type="image/png" href="/assets/img/favicon.png">
+<link rel="apple-touch-icon" href="/assets/img/emigo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600&display=swap">
+<link rel="stylesheet" href="/assets/css/emigo.css">
+
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="strip">
+  <nav class="strip-in" aria-label="Main">
+    <a class="brand" href="/" aria-label="Emigo home"><img class="mark" src="/assets/img/emigo-mark-96.webp" width="36" height="36" alt=""><img class="word" src="/assets/img/emigo-wordmark.svg" width="64" height="25" alt="emigo"></a>
+    <div class="keys"><a class="key" href="/#tools">What it does</a><a class="key" href="/#pricing">Pricing</a><a class="key" href="/#privacy">Privacy</a></div>
+    <a class="key key-go" href="https://apps.apple.com/us/app/emigo-better-texting/id6748092950">Get Emigo</a>
+  </nav>
+</header>
+
+<main id="main" class="doc">
+  <div class="wrap"><div class="doc-in">
+<h1>Tell us what to fix.</h1>
+<p class="updated">Feedback, bugs and ideas all go to one inbox.</p>
+<p style="font-size:20px"><a href="mailto:info@joinemigo.com?subject=Emigo%20feedback">Email feedback to info@joinemigo.com</a></p>
+<p>Something broken, or a question about your subscription? Write to <a href="mailto:support@joinemigo.com?subject=Emigo%20support">support@joinemigo.com</a> and include your iPhone model and iOS version if you can.</p>
+<p><a href="/">Back to the home page</a></p>
+  </div></div>
+</main>
+<script>
+(function(){var h=document.querySelector('.strip');if(!h)return;
+function sc(){h.classList.toggle('is-scrolled',window.scrollY>12)}sc();window.addEventListener('scroll',sc,{passive:true});
+var m=h.querySelector('.menu');if(m)m.addEventListener('click',function(e){if(e.target.closest('a'))m.removeAttribute('open')});
+var ks=[].slice.call(h.querySelectorAll('.key[href^="#"]'));if(!ks.length||!('IntersectionObserver' in window))return;
+var ids=[],vis={};ks.forEach(function(k){var id=k.getAttribute('href').slice(1);if(ids.indexOf(id)<0)ids.push(id)});
+var io=new IntersectionObserver(function(es){es.forEach(function(e){vis[e.target.id]=e.isIntersecting});
+var cur=ids.filter(function(id){return vis[id]})[0];
+ks.forEach(function(k){if(k.getAttribute('href')==='#'+cur)k.setAttribute('aria-current','true');else k.removeAttribute('aria-current')})},{rootMargin:'-30% 0px -60% 0px'});
+ids.forEach(function(id){var el=document.getElementById(id);if(el)io.observe(el)})})();
+</script>
+
+<footer class="on-dark" id="feedback">
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <h2>Tell us what to fix.</h2>
+        <p>Feedback, bugs and ideas all go to the same inbox.</p>
+        <p><a href="mailto:info@joinemigo.com?subject=Emigo%20feedback">info@joinemigo.com</a></p>
+      </div>
+      <div>
+        <h3>Help</h3>
+        <ul>
+          <li><a href="mailto:support@joinemigo.com?subject=Emigo%20support">Contact support</a></li>
+          <li><a href="/#questions">Questions</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="/terms-of-service">Terms of Use</a></li>
+          <li><a href="/privacy-policy">Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>Follow</h3>
+        <ul>
+          <li><a href="https://www.instagram.com/emigo.us/" rel="noopener">Instagram</a></li>
+          <li><a href="https://www.tiktok.com/@emigo.us" rel="noopener">TikTok</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal-line">&copy; 2026 Emigo Wellness, Inc.</p>
+  </div>
+</footer>
+
+</body>
+</html>
