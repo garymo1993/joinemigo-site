@@ -123,10 +123,10 @@ ins{text-decoration:none}
 /* connections: the slime cries over the heated draft and perks up at the rewrite */
 .cry{display:block;width:100%;height:auto;overflow:visible}
 .cs-slime{transform-origin:512px 849px}
-.cs-cow{transform-origin:630px 246px;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
+.cs-cow{transform-origin:630px 240px;transition:transform .5s cubic-bezier(.3,1.6,.5,1)}
 .cs-eyes{transform-origin:513px 540px;transition:transform .4s ease}
 .cs-brows,.cs-sad,.cs-smile{transition:opacity .4s ease}
-.cs-smile{transform:rotate(30deg)}.is-sad .cs-cow{transform:rotate(24deg)}
+.cs-smile,.is-sad .cs-cow{transform:rotate(30deg)}
 .is-sad .cs-eyes{transform:scaleY(.78)}
 .is-happy .cs-brows,.is-happy .cs-sad{opacity:0}
 .is-happy .cs-smile{opacity:1}
@@ -195,7 +195,7 @@ ins{text-decoration:none}
   }
   @keyframes sl-pop{0%,50%{transform:translateY(0);animation-timing-function:cubic-bezier(.2,.8,.3,1)}59%{transform:translateY(-150px);animation-timing-function:cubic-bezier(.6,0,.9,.4)}67%,100%{transform:translateY(0)}}
   @keyframes sl-squint{0%,10%{transform:scaleY(1)}22%,52%{transform:scaleY(.12)}58%,100%{transform:scaleY(1)}}
-  @keyframes sl-squish-cow{0%,100%{transform:rotate(0)}38%,50%{transform:rotate(16deg)}57%{transform:rotate(-26deg)}66%{transform:rotate(22deg)}73%{transform:rotate(-14deg)}80%{transform:rotate(9deg)}87%{transform:rotate(-5deg)}94%{transform:rotate(2deg)}}
+  @keyframes sl-squish-cow{0%,100%{transform:rotate(0)}38%,50%{transform:rotate(34deg)}57%{transform:rotate(-26deg)}66%{transform:rotate(22deg)}73%{transform:rotate(-14deg)}80%{transform:rotate(9deg)}87%{transform:rotate(-5deg)}94%{transform:rotate(2deg)}}
   @keyframes sl-squish-shadow{0%,100%{transform:scale(1)}38%,50%{transform:scale(1.34)}59%{transform:scale(.72)}67%{transform:scale(1.14)}75%{transform:scale(1)}}
   @keyframes sl-move{
     0%,16%{transform:translateY(0) rotate(0);animation-timing-function:cubic-bezier(.2,.75,.35,1)}
